@@ -1,0 +1,13 @@
+.p-menu {
+  width: 100%;
+  border: none;
+
+  .p-menuitem-link {
+    &-active {
+      border-left: 5px solid var(--blue-400);
+      .p-menuitem-text {
+
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+<p-toolbar>
+  <div class="p-toolbar-group-start">
+    Filter Characters
+  </div>
+  <div class="p-toolbar-group-end">
+    <form [formGroup]="filterForm" (ngSubmit)="search()" class="flex flex-wrap gap-1">
+      <input type="text" pInputText placeholder="Name" formControlName="name" />
+      <input type="text" pInputText placeholder="Type" formControlName="type" />
+      <p-dropdown [options]="statuses" optionLabel="label" optionValue="value" placeholder="Status" formControlName="status"></p-dropdown>
+      <p-dropdown [options]="genders" optionLabel="label" optionValue="value" placeholder="Gender" formControlName="gender"></p-dropdown>
+      <p-button type="submit" label="Search" icon="pi pi-search"></p-button>
+      <p-button type="button" icon="pi pi-trash" styleClass="p-button-danger" (onClick)="clearFilter()"></p-button>
+    </form>
+  </div>
+</p-toolbar>
+
+<div class="flex flex-wrap justify-content-center" *ngIf="characters$ | async as characters">
+  <div class="col-3" *ngFor="let character of characters.results">
+    <p-card [header]="character.name">
+      <ng-template pTemplate="header">
+        <img [alt]="character.name" fill [ngSrc]="character.image" priority/>
+      </ng-template>
+      <p class="truncate"><strong>Status: </strong>{{character.status}}</p>
+      <p class="truncate"><strong>Species: </strong>{{character.species}}</p>
+      <p class="truncate"><strong>Gender: </strong>{{character.gender}}</p>
+      <ng-template pTemplate="footer">
+        <p-button label="Detail" icon="pi pi-arrow-right" styleClass="w-full"
+                  [routerLink]="character.id.toString()"></p-button>
+      </ng-template>
+    </p-card>
+  </div>
+  <div class="col-12">
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="20"
+                 [totalRecords]="characters.info.count"></p-paginator>
+  </div>
+</div>

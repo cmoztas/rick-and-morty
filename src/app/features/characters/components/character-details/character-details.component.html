@@ -1,0 +1,20 @@
+<div class="flex gap-4 mb-3">
+  <p-button icon="pi pi-arrow-left" pTooltip="Previous page" (onClick)="location.back()"></p-button>
+  <h1>Character Details</h1>
+</div>
+<div *ngIf="character | async as char">
+  <div class="flex gap-4">
+    <div class="relative h-18rem w-18rem">
+      <img fill [ngSrc]="char.image" [alt]="char.name" [priority]="true">
+    </div>
+    <div class="character-details">
+      <p><strong>Name: </strong>{{char.name}}</p>
+      <p><strong>Status: </strong>{{char.status}}</p>
+      <p><strong>Species: </strong>{{char.species}}</p>
+      <p><strong>Type: </strong>{{char.type}}</p>
+      <p><strong>Origin: </strong>{{char.origin.name}}</p>
+      <p><strong>Location: </strong>{{char.location.name}}</p>
+      <p><strong>Create Date of Data: </strong>{{char.created | date}}</p>
+    </div>
+  </div>
+</div>
