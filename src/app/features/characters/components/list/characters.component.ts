@@ -55,7 +55,8 @@ export class CharactersComponent implements OnInit {
   public clearFilter(): void {
     this.filterForm.reset();
     this.queryString = undefined;
-    this.ngOnInit();
+    this.first = 0;
+    this.characters$ = this.cs.getAllCharacters();
   }
 
   onPageChange(event: any): void {
